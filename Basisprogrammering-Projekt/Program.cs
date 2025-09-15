@@ -4,29 +4,47 @@
     {
         static void Main(string[] args)
         {
-            // FirePaaStribe();
-
             HovedRegning();
-
-            Console.ReadKey();
         }
 
         static void HovedRegning()
         {
-            string[] calculationExa = ["2 + 5 * 6", "6/3 * 2" ];
-            int[] calculationVal = [32, 4];
+            // Globale variabler for HovedRegning spillet.
+            string[] calculationExa = ["2 + 5 * 6", "6/3 * 2", "62 - 100 * 4"]; // Indeholder regnings eksemplerne
+            int[] calculationVal = [32, 4, 152]; // Indeholder regnings værdierne. De to Arrays fungerer som et parrallel par.
+            int pos = 0; // Variablet som holder positionen for hvilket index der er nået til i de to arrays.
+            int points = 0; // Indeholder mængden af points som brugeren opnår.
+            int totalPoints = calculationExa.Length;
 
-            while (true)
+            // While loopet ser om den gældende position er mindre end mængden af regneeksempler.
+            // Hvis det er true, så forsætter den, og omvendt stopper den hvis der returnes false.
+            while (pos < calculationExa.Length)
             {
-                if(int.TryParse(Console.ReadLine(), out int answer))
-                {
+                Console.WriteLine(calculationExa[pos]); // Udskriver regneeksemplet vi er nået til.
 
+                if (int.TryParse(Console.ReadLine(), out int answer)) // Ser om inputtet kan parses til en int.
+                {
+                    if(answer == calculationVal[pos]) // Hvis spillerens gæt = den position vi er nået
+                        // så må gættet være korrekt. Der sammenlignes derfor værdien i calculationVal[pos] med spillerens gæt.
+                    {
+                        Console.WriteLine($"Korrekt: {calculationExa[pos]} = ({calculationVal[pos]})");
+                        points++;
+                    }
+                    else // Hvis spilleren skriver et forkert resultat til regningseksemplet
+                    {
+                        Console.WriteLine($"Forkert: {calculationExa[pos]} != ({answer})");
+                    }
+                    pos++; // positionen inkrementeres, så begge arrays er ved næste index, som positionen indikerer.
                 }
-                else
+                else // Hvis spilleren ikke indtaster et nummer vises denne besked, og loopet begynder forfra.
+                // Så længe der er flere eksempler.
                 {
                     Console.WriteLine("Indtast venligst et nummer: ");
                 }
             }
+            Console.WriteLine($"Du fik: {points} ud af {totalPoints}"); // Udskriver mængden af points
+            // som spilleren fik ud af den totale mængde af mulige points
+            Console.ReadKey();
         }
 
         // FirePaaStribe overodnet funktion som kalder spillet.
