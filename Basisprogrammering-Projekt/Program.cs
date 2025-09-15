@@ -4,7 +4,44 @@
     {
         static void Main(string[] args)
         {
-            HovedRegning();
+            NumbersInOrder(); 
+
+            Console.ReadKey();
+        }
+
+        static void NumbersInOrder()
+        {
+            int[] numbers = new int[10];
+            SetNumberArray();
+            PrintNumberArray();
+            
+            // Lav logik der tjekker om nummeret allerede er tildelt
+            // hvis to positioner får tildelt samme værdi
+            void SetNumberArray()
+            {
+                Random random = new Random();
+                for (int i = 0; i < numbers.Length; i++)
+                {
+                    numbers[i] = random.Next(1, 100);
+                }
+            }
+
+            void PrintNumberArray()
+            {
+                for (int i = 0; i < numbers.Length; ++i)
+                {
+                    Console.Write(i + "  ");
+                }
+                Console.WriteLine();
+                Console.WriteLine();
+                
+                for (int i = 0; i < numbers.Length; i++)
+                {
+                    Console.Write(numbers[i] + " ");
+                }
+            }
+
+            Console.ReadKey();
         }
 
         static void HovedRegning()
