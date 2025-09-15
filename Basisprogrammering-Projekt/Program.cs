@@ -4,9 +4,73 @@
     {
         static void Main(string[] args)
         {
-            FirePaaStribe();
+            HovedRegning();
+        }
 
+        static void HovedRegning()
+        {
+            // Globale variabler for HovedRegning spillet.
+            string[] calculationExa = ["2 + 5 * 6", "6/3 * 2", "62 - 100 * 4"]; // Indeholder regnings eksemplerne
+            int[] calculationVal = [32, 4, 152]; // Indeholder regnings værdierne. De to Arrays fungerer som et parrallel par.
+            int pos = 0; // Variablet som holder positionen for hvilket index der er nået til i de to arrays.
+            int points = 0; // Indeholder mængden af points som brugeren opnår.
+            int totalPoints = calculationExa.Length; // Mængden af spørgsmål som spillet indeholder
+            // er lig med den totale mængde points der kan opnås.
+
+            GreetMessage(); // Kalder GreetMessage funktionen som introducerer spilleren til spillet
+            // og forklarer hvordan det virker i praksis.
+
+            // While loopet ser om den gældende position er mindre end mængden af regneeksempler.
+            // Hvis det er true, så forsætter den, og omvendt stopper den hvis der returnes false.
+            while (pos < calculationExa.Length)
+            {
+                Console.WriteLine(calculationExa[pos]); // Udskriver regneeksemplet vi er nået til.
+
+                if (int.TryParse(Console.ReadLine(), out int answer)) // Ser om inputtet kan parses til en int.
+                {
+                    if(answer == calculationVal[pos]) // Hvis spillerens gæt = den position vi er nået
+                        // så må gættet være korrekt. Der sammenlignes derfor værdien i calculationVal[pos] med spillerens gæt.
+                    {
+                        Console.WriteLine($"Korrekt: {calculationExa[pos]} = ({calculationVal[pos]})");
+                        points++;
+                    }
+                    else // Hvis spilleren skriver et forkert resultat til regningseksemplet
+                    {
+                        Console.WriteLine($"Forkert: {calculationExa[pos]} != ({answer})");
+                    }
+                    Console.WriteLine();
+                    pos++; // positionen inkrementeres, så begge arrays er ved næste index, som positionen indikerer.
+                }
+                else // Hvis spilleren ikke indtaster et nummer vises denne besked, og loopet begynder forfra.
+                // Så længe der er flere eksempler.
+                {
+                    Console.WriteLine("Indtast venligst et nummer: ");
+                }
+            }
+            Console.WriteLine($"Du fik: {points} ud af {totalPoints}"); // Udskriver mængden af points
+            // som spilleren fik ud af den totale mængde af mulige points
             Console.ReadKey();
+
+            // GreetMessage() funktionen forklarer hvordan spillet virker, og giver en kort og kvik introduktion.
+            void GreetMessage()
+            {
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("Velkommen til HovedRegning");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine();
+                Console.WriteLine("Spillet er simpel, du skal udregne noget Matematik.");
+                Console.WriteLine("Spillet stiger i sværhedsgrad efter hver opgave.");
+                Console.WriteLine("Du skal derfor benytte de såkaldte 'regneregler' igen :)");
+                Console.WriteLine();
+                Console.ForegroundColor= ConsoleColor.Cyan;
+                Console.WriteLine("Held og lykke!");
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.WriteLine("Tryk på hvilken som helst tast for at begynder spillet");
+                Console.ResetColor();
+                Console.ReadKey();
+                Console.Clear();
+            }
         }
 
         // FirePaaStribe overodnet funktion som kalder spillet.
