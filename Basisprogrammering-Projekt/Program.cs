@@ -12,18 +12,45 @@
         static void NumbersInOrder()
         {
             int[] numbers = new int[10];
-            SetNumberArray();
+            int[] sortedArray = SortArray(numbers);
+            int numberOfTry = 0;
+            bool playing = true;
+            
+
+            InitNumberArray();
             PrintNumberArray();
+
+            SortArray(numbers);
+            PrintSortedArray();
+
+            while (playing)
+            {
+
+            }
             
             // Lav logik der tjekker om nummeret allerede er tildelt
             // hvis to positioner får tildelt samme værdi
-            void SetNumberArray()
+            void InitNumberArray()
             {
                 Random random = new Random();
                 for (int i = 0; i < numbers.Length; i++)
                 {
                     numbers[i] = random.Next(1, 100);
                 }
+            }
+
+            int[] SortArray(int[] array)
+            {
+                Array.Sort(array);
+                return array;
+            }
+
+            void SetNumberOrder(int pos)
+            {
+                if(pos <= numbers.Length -1 || pos > 0)
+                {
+                    
+;                }
             }
 
             void PrintNumberArray()
@@ -40,7 +67,14 @@
                     Console.Write(numbers[i] + " ");
                 }
             }
-
+           
+            void PrintSortedArray()
+            {
+                for (int i = 0; i < sortedArray.Length; i++)
+                {
+                    Console.Write(sortedArray[i] + " ");
+                }
+            }
             Console.ReadKey();
         }
 
