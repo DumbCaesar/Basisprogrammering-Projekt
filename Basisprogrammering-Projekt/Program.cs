@@ -18,8 +18,6 @@ namespace Basisprogrammering_Projekt
             int randomWordLength = randomWord.Length;
             int lives = 5;
 
-            Console.WriteLine(randomWordLength + randomWord);
-
             string word = "";
             for (int i = 0; i < randomWordLength; i++)
             {
@@ -28,6 +26,7 @@ namespace Basisprogrammering_Projekt
 
             while (lives > 0 && word.Contains("-"))
             {
+                Console.Clear();
                 Console.WriteLine(word);
                 Console.WriteLine("Lives left: " + lives);
                 Console.WriteLine("Guess a letter");
@@ -47,15 +46,18 @@ namespace Basisprogrammering_Projekt
                 if (!correct)
                 {
                     lives--;
-                    Console.WriteLine("Wrong");
+                    Console.WriteLine("Incorrect");
+                    Console.ReadKey();
                 }
             }
             if (word.Contains("-"))
             {
+                Console.Clear();
                 Console.WriteLine("You Lose! The word was: " + randomWord);
             }
             else
             {
+                Console.Clear();
                 Console.WriteLine("You Win! The word was: " + randomWord);
             }
         }
