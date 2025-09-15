@@ -14,19 +14,23 @@
             int[] numbers = new int[10];
             int[] sortedArray = SortArray(numbers);
             int numberOfTry = 0;
+            int posOne = 0;
+            int posTwo = 0;
             bool playing = true;
-            
-
             InitNumberArray();
-            PrintNumberArray();
+           
+            //SortArray(numbers);
+            //PrintSortedArray();
 
-            SortArray(numbers);
-            PrintSortedArray();
-
-            while (playing)
-            {
-
-            }
+            
+                PrintNumberArray();
+                Console.WriteLine("Indtast positionen der skal erstatte");
+                if (int.TryParse(Console.ReadLine(), out posOne)) ;
+                Console.WriteLine("Indtast positionen der skal flyttes");
+                if (int.TryParse(Console.ReadLine(), out posTwo)) ;
+                SetNumberOrder(posOne, posTwo);
+                PrintNumberArray();
+           
             
             // Lav logik der tjekker om nummeret allerede er tildelt
             // hvis to positioner får tildelt samme værdi
@@ -45,12 +49,15 @@
                 return array;
             }
 
-            void SetNumberOrder(int pos)
+            void SetNumberOrder(int posOne, int posTwo)
             {
-                if(pos <= numbers.Length -1 || pos > 0)
+                if (posOne >= 0 && posOne < numbers.Length && 
+                    posTwo >= 0 && posTwo < numbers.Length)
                 {
-                    
-;                }
+                    int temp = numbers[posOne];
+                    numbers[posOne] = numbers[posTwo];
+                    numbers[posTwo] = temp;
+                }
             }
 
             void PrintNumberArray()
