@@ -11,44 +11,52 @@ namespace Basisprogrammering_Projekt
 
         static void Hangman()
         {
-            string[] words = {"TIGER", "CRANES", "GLUE" };
+            string[] wordList = {"TIGER", "CRANES", "GLUE" };
             Random random = new Random();
-            int randomNumber = random.Next(0, 3);
-            string word = words[randomNumber];
-            int hiddenWordLength = word.Length;
+            int randomNumber = random.Next(wordList.Length);
+            string randomWord = wordList[randomNumber];
+            int randomWordLength = randomWord.Length;
+            int lives = 5;
 
-            Console.WriteLine(hiddenWordLength + word);
+            Console.WriteLine(randomWordLength + randomWord);
 
-            //Console.WriteLine("Guess a letter");
-            //char guess = Convert.ToChar(Console.Read());
-
-
-
-            while (true)
+            string word = "";
+            for (int i = 0; i < randomWordLength; i++)
             {
+                word += "-";
+            }
+
+            while (lives > 0 && word.Contains("-"))
+            {
+                Console.WriteLine(word);
+                Console.WriteLine("Lives left: " + lives);
                 Console.WriteLine("Guess a letter");
-                char guess = Convert.ToChar(Console.Read());
+                string input = Console.ReadLine().ToUpper();
 
-                PrintWord();
+                char guess = Convert.ToChar(input);
+                bool correct = false;
 
-                Console.Write(guess);
-                
-                void PrintWord()
+                for (int i = 0; i < randomWordLength; i++)
                 {
-                    for (int i = 0; i < hiddenWordLength; i++)
+                    if (randomWord[i] == guess)
                     {
-                        if (word[i] == guess)
-                        {
-                            Console.Write(guess + " ");
-                        }
-                        else
-                        {
-                            Console.Write("_ ");
-                        }
+                        word = word.Remove(i, 1).Insert(i, guess.ToString());
+                        correct = true;
                     }
-                    Console.WriteLine();
                 }
-                Console.WriteLine(hiddenWordLength + word);
+                if (!correct)
+                {
+                    lives--;
+                    Console.WriteLine("Wrong");
+                }
+            }
+            if (word.Contains("-"))
+            {
+                Console.WriteLine("You Lose! The word was: " + randomWord);
+            }
+            else
+            {
+                Console.WriteLine("You Win! The word was: " + randomWord);
             }
         }
     }
