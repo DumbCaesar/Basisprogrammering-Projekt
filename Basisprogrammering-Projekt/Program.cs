@@ -12,24 +12,41 @@
         static void NumbersInOrder()
         {
             int[] numbers = new int[10];
+            InitNumberArray();  
             int[] sortedArray = SortArray(numbers);
             int numberOfTry = 0;
             int posOne = 0;
             int posTwo = 0;
             bool playing = true;
-            InitNumberArray();
            
-            //SortArray(numbers);
-            //PrintSortedArray();
-
-            
+            while (playing)
+            {
                 PrintNumberArray();
+                Console.WriteLine();
                 Console.WriteLine("Indtast positionen der skal erstatte");
-                if (int.TryParse(Console.ReadLine(), out posOne)) ;
+                if (!int.TryParse(Console.ReadLine(), out posOne))
+                    continue;
                 Console.WriteLine("Indtast positionen der skal flyttes");
-                if (int.TryParse(Console.ReadLine(), out posTwo)) ;
+                if (!int.TryParse(Console.ReadLine(), out posTwo))
+                    continue;
+
+                Console.Clear();
+
                 SetNumberOrder(posOne, posTwo);
-                PrintNumberArray();
+                numberOfTry++;
+
+                if (IsMatch())
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Tillykke alle tal er sorteret korrekt.!");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    Console.WriteLine($"Du brugte {numberOfTry} forsøg.");
+                    Console.ResetColor();
+                    playing = false;
+                }
+                
+            }
+           
            
             
             // Lav logik der tjekker om nummeret allerede er tildelt
@@ -43,12 +60,6 @@
                 }
             }
 
-            int[] SortArray(int[] array)
-            {
-                Array.Sort(array);
-                return array;
-            }
-
             void SetNumberOrder(int posOne, int posTwo)
             {
                 if (posOne >= 0 && posOne < numbers.Length && 
@@ -58,6 +69,19 @@
                     numbers[posOne] = numbers[posTwo];
                     numbers[posTwo] = temp;
                 }
+            }
+
+            int[] SortArray(int[] array)
+            {
+                int[] copy = (int[])array.Clone(); // Laver en kopi, ellers bliver det sortered array
+                                                   // skrevet ud i stedet for det usorterede, somehow.
+                Array.Sort(copy);
+                return copy;
+            }
+
+            bool IsMatch()
+            {
+                return numbers.SequenceEqual(sortedArray);
             }
 
             void PrintNumberArray()
