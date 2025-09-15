@@ -1,4 +1,6 @@
-﻿namespace Basisprogrammering_Projekt
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Basisprogrammering_Projekt
 {
     internal class Program
     {
@@ -53,10 +55,26 @@
             // hvis to positioner får tildelt samme værdi
             void InitNumberArray()
             {
+                int[] pool = new int[99];
+                for (int i = 0; i < pool.Length; i++)
+                {
+                    pool[i] = i;
+                }
+
                 Random random = new Random();
+
+                // Fisher-Yates shuffle.
+                for (int i = pool.Length -1; i > 0; i--)
+                {
+                    int j = random.Next(i + 1);
+                    int temp = pool[i];
+                    pool[i] = pool[j];
+                    pool[j] = temp;
+                }
+
                 for (int i = 0; i < numbers.Length; i++)
                 {
-                    numbers[i] = random.Next(1, 100);
+                    numbers[i] = pool[i];
                 }
             }
 
