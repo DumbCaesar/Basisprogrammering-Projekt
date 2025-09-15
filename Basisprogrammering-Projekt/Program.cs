@@ -4,9 +4,29 @@
     {
         static void Main(string[] args)
         {
-            FirePaaStribe();
+            // FirePaaStribe();
+
+            HovedRegning();
 
             Console.ReadKey();
+        }
+
+        static void HovedRegning()
+        {
+            string[] calculationExa = ["2 + 5 * 6", "6/3 * 2" ];
+            int[] calculationVal = [32, 4];
+
+            while (true)
+            {
+                if(int.TryParse(Console.ReadLine(), out int answer))
+                {
+
+                }
+                else
+                {
+                    Console.WriteLine("Indtast venligst et nummer: ");
+                }
+            }
         }
 
         // FirePaaStribe overodnet funktion som kalder spillet.
