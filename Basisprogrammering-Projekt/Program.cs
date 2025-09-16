@@ -1,10 +1,170 @@
-﻿namespace Basisprogrammering_Projekt
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Basisprogrammering_Projekt
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            HovedRegning();
+            NumbersInOrder(); 
+
+            Console.ReadKey();
+        }
+
+        static void NumbersInOrder()
+        {
+            // globale variabler for spillet
+
+            int[] numbers = new int[10]; // her oprettes et tomt numbers array og der tildels 10 pladser. 
+            InitNumberArray();  // Programmet initilserer numbers array efter det er erklæret
+                                // og fylder den med 10 random numre. 
+            int[] sortedArray = SortArray(numbers); // sortedArray bliver et sorteret array af numbers.
+            int numberOfTry = 0; // Holder styr på mængden af forsøg spilleren bruger på at løse arrayet.
+            int posOne = 0; // global varialbel på position 1. Bruges til at skifte pladser i arrayet.
+            int posTwo = 0; // global variabel på position 2
+            bool playing = true; // boolean om spilleren spiller stadig.
+           
+            while (playing) // main loop for spillet. Ser om spillet kører, så længde det gør er spillet stadig i gang.
+            {
+                PrintNumberArray(); // Hvert loop startes der med at printes numbers array.
+                Console.WriteLine();
+                Console.WriteLine("Indtast positionen der skal flyttes"); // spilleren indtaster posOne
+                if (!int.TryParse(Console.ReadLine(), out posOne)) // ser om inputtet er et nummer
+                    continue; // hvis ikke starter den loopet forfra. (continue) indtil input indeholder et nummer.
+                Console.WriteLine("Indtast positionen der skal byttes"); // posTwo
+                if (!int.TryParse(Console.ReadLine(), out posTwo))
+                    continue;
+
+                Console.Clear(); // Clear konsol.
+
+                SetNumberOrder(posOne, posTwo); // bytter de to pladser hvis de eksisterer.
+                numberOfTry++; // inkrementerer forsøg.
+
+                if (IsMatch()) // hvis numbers array matcher sortedArray så vil spillet være vundet.
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Tillykke alle tal er sorteret korrekt.!");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    Console.WriteLine($"Du brugte {numberOfTry} forsøg."); // udskriver mængden af forsøg brugt.
+                    Console.ResetColor();
+                    playing = false; // spillet er slut, playing = false.
+                }
+                
+            }
+           
+            // InitNumerArray() funktionen tildeler numbers array 10 random værdier mellem 1-99.
+            // For at sikre at det samme nummer ikke tildeles to gange, bruges der Fisher-Yates shuffle metoden.
+            // som sikrer at det er så random som det kan blive af tal.
+           
+            void InitNumberArray()
+            {
+                int[] pool = new int[99]; // Her oprettes der et midlertidigt int[] pool array. Som holder 99 numre.
+                for (int i = 0; i < pool.Length; i++) // Simpel for loop der tildeler hvert index i arrayet, i.
+                {
+                    pool[i] = i; // feks pool[6] = 6
+                }
+
+                Random random = new Random(); // Vi bruger Random klassen til at kunne tildele random værdier.
+
+                // Fisher-Yates shuffle.
+                for (int i = pool.Length -1; i > 0; i--) // for loop der tildeler længden af pool -1 til i. og kører indtil i > 0.
+                {
+                    int j = random.Next(i + 1); // int j tildeles i + 1. Det gøres fordi at
+                    // arrayet ikke ellers vil holde værdien, eksempel:
+                    // pool[0, 1, 2, 3, 4] = random.Next(5) her er værdien 5 ikke inkluderet, derfor skrives + 1.
+                    int temp = pool[i]; // Vi shuffler
+                    pool[i] = pool[j]; // Bytter plads
+                    pool[j] = temp; // bytter plads igen.
+                    // SetNumberOrder funktion har en mere detaljeret forklaring på hvad der sker her. Hvor der også shuffles.
+                }
+
+                for (int i = 0; i < numbers.Length; i++) // Her tildes der 10 værdier, som er random, da vi har shufflet ovenover.
+                {
+                    numbers[i] = pool[i]; // tildeler 10 værdier. 
+                }
+            }
+
+            // SetNumberOrder() funktionen står for at bytte to værdier i numbers array.
+            // Funktionen tager to parameter (int posOne, int posTwo), som er  de to værdier der skal bytte plads.
+
+            void SetNumberOrder(int posOne, int posTwo)
+            {
+                if (posOne >= 0 && posOne < numbers.Length && // Der tjekkes om posOne og posTwo er >= 0
+                    posTwo >= 0 && posTwo < numbers.Length) // som det laveste index et array kan have.
+                    // Derudover tjekkes der om de to numre er mindre end længden af numbers array, da index
+                    // selvfølgelig ikke kan være større end længden af arrayet. Hvis det er sandt kan de to numre bytte plads.
+                {
+                    // gamle kode, var omvendt fra nuværende SetNumberOrder.
+                    // nye gør det nemmere at forstå og mere intuitivt og logisk.
+
+                    //int temp = numbers[posOne];
+                    //numbers[posOne] = numbers[posTwo];
+                    //numbers[posTwo] = temp;
+
+                    // Her opretter vi et int temp, som skal fungere som et midlertidigt variabel.
+                    // Det gøres for at vi kan bytte værdier mellem posOne og PosTwo.
+
+                    int temp = numbers[posTwo];  // Her tildeler vi numbers[posTwo] værdien til temp.
+                    numbers[posTwo] = numbers[posOne]; // Her tildes numbers[posOne] værdien til numbers[posTwo]
+                    numbers[posOne] = temp; // og til sidst bliver numbers[posOne] tildelt værdien temp
+                    // som indeholder værdien fra posTwo, og dermed har posOne og posTwo byttet plads.
+                }
+            }
+
+            // SortArray() funktion returnerer et int[] og tager ind et int[] array.
+            // Denne funktions opgave består i at returne en sortert udgave af numbers[].
+            // Den er nødvendig, i dette spils logik for at kunne sammenligne med spillerens placeringer.
+            // numbers[] == sortedArray[]
+
+            int[] SortArray(int[] array)
+            {
+                int[] copy = (int[])array.Clone(); // Laver en kopi, ellers bliver det sortered array
+                                                   // skrevet ud i stedet for det usorterede, somehow.
+                Array.Sort(copy); // sorterer kopien i stigende rækkefølge.
+                return copy; // og returnerer den, som er et krav, da funktionen skal retunere et int[].
+            }
+
+            // IsMatch() funktionen er en boolean funktion. Den ser om numbers sekvensen er den samme som
+            // sortedArray, hvis det er sandt retunerer den true, ellers false.
+            // Denne funktion er derfor essentiel for at se om spilleren/brugeren har svaret korrekt. 
+            // Derfor er det funktionen der afgør om spilleren har vundet eller ej.
+
+            bool IsMatch()
+            {
+                return numbers.SequenceEqual(sortedArray); // SequenceEqual er en funktion fra Linq.
+                // Som gør det nemmere. Alternativt kan det f.eks. gøres med et par for loops. 
+            }
+
+            // Funktionen PrintNumerArray() printer numbers array ud efter hver runde, altså når spilleren
+            // har rykket 2 tal i arrayet.
+
+            void PrintNumberArray()
+            {
+                for (int i = 0; i < numbers.Length; ++i) // dette for loop tager længden af numbers array.
+                {
+                    Console.Write(i + "  "); // og skriver index tal over hver position i arrayet.
+                }
+                Console.WriteLine(); // spacing
+                Console.WriteLine();
+                
+                for (int i = 0; i < numbers.Length; i++) // tager længende af numbers array igen.
+                {
+                    Console.Write(numbers[i] + " "); // og udskriver værdierne i numbers array, med list spacing mellem.
+                }
+            }
+           
+            // Denne funktion PrintSortedArray() printer det sorteret array ud, men benyttes ikke i koden nuværende.
+            // og er derfor udkommenteret. Funktionen er næsten identisk til PrintNumberArray i funktionalitet.
+            // Der er kun nogle små differancer og ekstra funktionalitet ved den overstående.
+
+            //void PrintSortedArray()
+            //{
+            //    for (int i = 0; i < sortedArray.Length; i++)
+            //    {
+            //        Console.Write(sortedArray[i] + " ");
+            //    }
+            //}
+            Console.ReadKey();
         }
 
         static void HovedRegning()
