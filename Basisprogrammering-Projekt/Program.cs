@@ -6,7 +6,7 @@ namespace Basisprogrammering_Projekt
     {
         static void Main(string[] args)
         {
-            HovedRegning(); 
+            FirePaaStribe(); 
 
             Console.ReadKey();
         }
@@ -309,14 +309,17 @@ namespace Basisprogrammering_Projekt
                 // som currentPiece, der tjekkes hvilken spillers tur det er, og den korrete besked vises.
 
                 Console.WriteLine(currentMsg); //Udskriver en variation af en besked afhængig af spillerens tur. 
-
                 if (int.TryParse(Console.ReadLine(), out int colNum)) // Læseren spillerens input, og ser om det er et valid nummer.
                 {
                     // sikrer at spilleren ikke kan gå uden for boardet
                     if (colNum < 0 || colNum >= board.GetLength(1)) // Kolonne nummeret spilleren indtaster må ikke være
                                                                     // mindre end 0, og må ikke være større end mængden af kolonner i boardet.
                     {
+                        Console.Clear(); // Clear konsol, fjerner tidligere input.
+                        PrintBoard(); // Printer board ud igen.
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("Ugyldig kolonne. Prøv igen."); // Fejlmeddelse udskrives
+                        Console.ResetColor();
                         continue; // Hvis der er en fejl, skal startes loopet forfra. 
                         // Så brugeren kan indtaste en kolonne igen indtil, det er en valid kolonne.
                     }
@@ -354,7 +357,11 @@ namespace Basisprogrammering_Projekt
                 else // Lidt det samme som længere op, dog sker dette hvis brugeren ikke har indtastet et nummer
                 // men i stedet et bogstav eller en sætning for eksemepel.
                 {
+                    Console.Clear(); // Clear konsol, fjerner tidligere input.
+                    PrintBoard(); // Printer board ud igen.
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("Ugyldigt input. Indtast et tal mellem 0 og 6.");
+                    Console.ResetColor();
                 }
             }
 
