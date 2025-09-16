@@ -26,22 +26,55 @@ namespace Basisprogrammering_Projekt
            
             while (playing) // main loop for spillet. Ser om spillet kører, så længde det gør er spillet stadig i gang.
             {
+                Console.Clear();
                 PrintNumberArray(); // Hvert loop startes der med at printes numbers array.
                 Console.WriteLine();
                 Console.WriteLine("Indtast positionen der skal flyttes"); // spilleren indtaster posOne
                 if (!int.TryParse(Console.ReadLine(), out posOne)) // ser om inputtet er et nummer
                     continue; // hvis ikke starter den loopet forfra. (continue) indtil input indeholder et nummer.
-                Console.WriteLine("Indtast positionen der skal byttes"); // posTwo
+
+                if(posOne < 0 || posOne > numbers.Length -1) // Tjekker om posOne er mindre end 0, eller større end længden af array -1.
+                    // Hvis det er sandt betyder det at posOne er "out of bounds", og har ikke en tilsvarende værdi i array.
+                    // da array har positioner fra 0-9.
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Du kan ikke vælge et index ude fra array.");
+                    Console.ReadKey();
+                    Console.Clear();
+                    Console.ResetColor();
+                    continue;
+                }
+
+                Console.WriteLine("Indtast positionen der skal erstattes"); // posTwo
                 if (!int.TryParse(Console.ReadLine(), out posTwo))
                     continue;
 
-                Console.Clear(); // Clear konsol.
+                if (posTwo < 0 || posTwo > numbers.Length -1) // Identisk til den ovenover, kun variable er skiftet.
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Du kan ikke vælge et index ude fra array.");
+                    Console.ReadKey();
+                    Console.Clear();
+                    Console.ResetColor();
+                    continue;
+                }
+
+                if(posOne == posTwo) // Tjekker om de 2 postioner er identiske til hinanden, hvis det er sandt kan de ikke byttes. 
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("Du kan ikke bytte den samme position..");
+                    Console.ReadKey();
+                    Console.Clear();
+                    Console.ResetColor();
+                    continue;
+                }
 
                 SetNumberOrder(posOne, posTwo); // bytter de to pladser hvis de eksisterer.
                 numberOfTry++; // inkrementerer forsøg.
 
                 if (IsMatch()) // hvis numbers array matcher sortedArray så vil spillet være vundet.
                 {
+                    Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("Tillykke alle tal er sorteret korrekt.!");
                     Console.ForegroundColor = ConsoleColor.Gray;
@@ -164,7 +197,6 @@ namespace Basisprogrammering_Projekt
             //        Console.Write(sortedArray[i] + " ");
             //    }
             //}
-            Console.ReadKey();
         }
 
         static void HovedRegning()
