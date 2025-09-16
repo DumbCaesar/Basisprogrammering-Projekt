@@ -31,12 +31,40 @@ namespace Basisprogrammering_Projekt
                 Console.WriteLine("Indtast positionen der skal flyttes"); // spilleren indtaster posOne
                 if (!int.TryParse(Console.ReadLine(), out posOne)) // ser om inputtet er et nummer
                     continue; // hvis ikke starter den loopet forfra. (continue) indtil input indeholder et nummer.
+
+                if(posOne < 0 || posOne > numbers.Length)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Du kan ikke vælge et index ude fra array.");
+                    Console.ReadKey();
+                    Console.Clear();
+                    Console.ResetColor();
+                    continue;
+                }
+
                 Console.WriteLine("Indtast positionen der skal byttes"); // posTwo
                 if (!int.TryParse(Console.ReadLine(), out posTwo))
                     continue;
 
-                Console.Clear(); // Clear konsol.
+                if (posTwo < 0 || posTwo > numbers.Length)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Du kan ikke vælge et index ude fra array.");
+                    Console.ReadKey();
+                    Console.Clear();
+                    Console.ResetColor();
+                    continue;
+                }
 
+                if(posOne == posTwo)
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("Du kan ikke bytte den samme position..");
+                    Console.ReadKey();
+                    Console.Clear();
+                    Console.ResetColor();
+                    continue;
+                }
                 SetNumberOrder(posOne, posTwo); // bytter de to pladser hvis de eksisterer.
                 numberOfTry++; // inkrementerer forsøg.
 
