@@ -25,10 +25,10 @@ namespace Basisprogrammering_Projekt
             {
                 PrintNumberArray();
                 Console.WriteLine();
-                Console.WriteLine("Indtast positionen der skal erstatte");
+                Console.WriteLine("Indtast positionen der skal flyttes");
                 if (!int.TryParse(Console.ReadLine(), out posOne))
                     continue;
-                Console.WriteLine("Indtast positionen der skal flyttes");
+                Console.WriteLine("Indtast positionen der skal byttes");
                 if (!int.TryParse(Console.ReadLine(), out posTwo))
                     continue;
 
@@ -50,9 +50,6 @@ namespace Basisprogrammering_Projekt
             }
            
            
-            
-            // Lav logik der tjekker om nummeret allerede er tildelt
-            // hvis to positioner får tildelt samme værdi
             void InitNumberArray()
             {
                 int[] pool = new int[99];
@@ -83,9 +80,13 @@ namespace Basisprogrammering_Projekt
                 if (posOne >= 0 && posOne < numbers.Length && 
                     posTwo >= 0 && posTwo < numbers.Length)
                 {
-                    int temp = numbers[posOne];
-                    numbers[posOne] = numbers[posTwo];
-                    numbers[posTwo] = temp;
+                    //int temp = numbers[posOne];
+                    //numbers[posOne] = numbers[posTwo];
+                    //numbers[posTwo] = temp;
+
+                    int temp = numbers[posTwo];
+                    numbers[posTwo] = numbers[posOne];
+                    numbers[posOne] = temp;
                 }
             }
 
