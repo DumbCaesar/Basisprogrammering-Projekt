@@ -324,9 +324,17 @@ namespace Basisprogrammering_Projekt
                         // Så brugeren kan indtaste en kolonne igen indtil, det er en valid kolonne.
                     }
 
-                    SetField(colNum, currentPiece); // Her ved vi at kolonnenummeret brugeren har indtastet er valid
+                    PrintBoard(); // Sørger for at boardet altid overrrider en error, så layout forbliver identisk.
+
+                    // Her ved vi at kolonnenummeret brugeren har indtastet er valid
                     // og vi angiver kolonnenummeret som parameter i SetField() funktionen, som sætter spillerens spillebrik
                     // som er currentPiece. Den tjekker hvilken spillers tur det er og sætter den afhængig af dette.
+
+                    if (!SetField(colNum, currentPiece)) // Hvis der returneres false, starter while loopet forfra
+                                                         // Hvilket betyder at noget spilleren har indtastet ikke er valid
+                    {
+                        continue;
+                    }
 
                     PrintBoard(); // Her printer vi boardet, som der opdaterer spillet, hvis SetField() funktion er kaldt succesfuldt.
 
@@ -448,22 +456,30 @@ namespace Basisprogrammering_Projekt
 
             // Her er funktionen der sørger for logikken til at sætte en "brik" på brættet.
             // Funktionen har 2 parametre der gives for spilleren kan sætte sin brik.
-            // Funktionen kræver en colonne, og en string, der skal erstatte "." med en spiller brik. 
+            // Funktionen kræver en colonne, og en string, der skal erstatte "." med en spiller brik.
+            // Returnerer true eller false, som while loopet modtager.
 
-            void SetField(int col, string piece)
+            bool SetField(int col, string piece)
             {
+                if (board[0, col] != ".") // hvis række 0, col[i] != "." så må det betyde at der ikke er flere ledige pladser.
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"Der er ikke flere ledige pladser i kolonne {col}");
+                    Console.ResetColor();
+                    return false; // returnere false
+                }
+
                 for (int row = board.GetLength(0) - 1; row >= 0; row--) // Der loppes gennem rækkerne. 
                                                                         // Vi får længden og minuser med -1 for, at få det korrekte index i board.
                                                                         // Derefter lopper vi fra bunden af, da brikkerne skal fylde op fra bunden.
                 {
                     if (board[row, col] == ".") // Vi ser om positionen vi er ved, board[row, col]
-                                                // indeholder et "." som placeholder, hvis den gør erstatter vi den med en spiller brik.
-                                                // og vi bryder ud af loopet.
                     {
-                        board[row, col] = piece;
-                        break;
+                        board[row, col] = piece; // indeholder et "." som placeholder, hvis den gør erstatter vi den med en spiller brik.
+                        return true; // og vi bryder ud af loopet.
                     }
                 }
+                return false;
             }
 
             // Denne funktion er meget ens med InitializeBoard() funktionen
@@ -512,7 +528,7 @@ namespace Basisprogrammering_Projekt
                 {
                     for (int col = 0; col < board.GetLength(1); col++) // looper gennem anden værdi, i det to-dimensionelle "board" array
                     {
-                        board[row, col] = "."; // vi sætter placeholder værdien ved den position vi er ved 
+                        board[row, col] = "."; // vi sætter placeholder værdien ved den position vi er ved
                         Console.Write(board[row, col]); // og udskriver
                     }
                     Console.WriteLine();
