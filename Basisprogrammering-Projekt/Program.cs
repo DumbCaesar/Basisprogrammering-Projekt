@@ -6,7 +6,7 @@ namespace Basisprogrammering_Projekt
     {
         static void Main(string[] args)
         {
-            NumbersInOrder(); 
+            HovedRegning(); 
 
             Console.ReadKey();
         }
@@ -223,24 +223,36 @@ namespace Basisprogrammering_Projekt
                     if(answer == calculationVal[pos]) // Hvis spillerens gæt = den position vi er nået
                         // så må gættet være korrekt. Der sammenlignes derfor værdien i calculationVal[pos] med spillerens gæt.
                     {
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine($"Korrekt: {calculationExa[pos]} = ({calculationVal[pos]})");
                         points++;
+                        Console.ReadKey();
+                        Console.Clear();
+                        Console.ResetColor();
                     }
                     else // Hvis spilleren skriver et forkert resultat til regningseksemplet
                     {
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine($"Forkert: {calculationExa[pos]} != ({answer})");
+                        Console.ReadKey();
+                        Console.Clear();
+                        Console.ResetColor();
                     }
-                    Console.WriteLine();
                     pos++; // positionen inkrementeres, så begge arrays er ved næste index, som positionen indikerer.
                 }
                 else // Hvis spilleren ikke indtaster et nummer vises denne besked, og loopet begynder forfra.
                 // Så længe der er flere eksempler.
                 {
+                    Console.Clear();
                     Console.WriteLine("Indtast venligst et nummer: ");
                 }
             }
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine($"Du fik: {points} ud af {totalPoints}"); // Udskriver mængden af points
             // som spilleren fik ud af den totale mængde af mulige points
+            Console.ResetColor();
             Console.ReadKey();
 
             // GreetMessage() funktionen forklarer hvordan spillet virker, og giver en kort og kvik introduktion.
@@ -250,15 +262,15 @@ namespace Basisprogrammering_Projekt
                 Console.WriteLine("Velkommen til HovedRegning");
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine();
-                Console.WriteLine("Spillet er simpel, du skal udregne noget Matematik.");
-                Console.WriteLine("Spillet stiger i sværhedsgrad efter hver opgave.");
-                Console.WriteLine("Du skal derfor benytte de såkaldte 'regneregler' igen :)");
+                Console.WriteLine("1. Spillet er simpel, du skal udregne noget Matematik.");
+                Console.WriteLine("2. Spillet stiger i sværhedsgrad efter hver opgave.");
+                Console.WriteLine("3. Du skal derfor benytte de såkaldte 'regneregler' igen :)");
                 Console.WriteLine();
                 Console.ForegroundColor= ConsoleColor.Cyan;
                 Console.WriteLine("Held og lykke!");
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.Gray;
-                Console.WriteLine("Tryk på hvilken som helst tast for at begynder spillet");
+                Console.WriteLine("Tryk på hvilken som helst tast for at begynder spillet..");
                 Console.ResetColor();
                 Console.ReadKey();
                 Console.Clear();
