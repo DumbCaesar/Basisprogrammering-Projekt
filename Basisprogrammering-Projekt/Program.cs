@@ -6,52 +6,40 @@ namespace Basisprogrammering_Projekt
     {
         static void Main(string[] args)
         {
-            int spilValg = 0;
-            Console.WriteLine("Indtast tallet på det spil du vil spille \n");
-            Console.WriteLine("1. Hangman");
-            Console.WriteLine("2. Fire på stribe");
-            Console.WriteLine("3. Hovedregning");
-            Console.WriteLine("4. Sæt tal i rækkefølge");
-
             while (true)
             {
-                if (!int.TryParse(Console.ReadLine(), out spilValg))
+                Console.Clear();
+                int spilValg = 0;
+                Console.WriteLine("Indtast tallet på det spil du vil spille \n");
+                Console.WriteLine("1. Hangman");
+                Console.WriteLine("2. Fire på stribe");
+                Console.WriteLine("3. Hovedregning");
+                Console.WriteLine("4. Sæt tal i rækkefølge");
+                if (int.TryParse(Console.ReadLine(), out spilValg))
                 {
-                    Console.WriteLine("Du skal vælge et tal");
-                    Console.ReadKey();
-                    continue;
+                    if (spilValg > 0 && spilValg < 5)
+                    {
+                        switch (spilValg)
+                        {
+                            case 1:
+                                Hangman();
+                                break;
+                            case 2:
+                                FirePaaStribe();
+                                break;
+                            case 3:
+                                Console.Clear();
+                                HovedRegning();
+                                break;
+                            case 4:
+                                NumbersInOrder();
+                                break;
+                        }
+                    }
                 }
-                if (spilValg < 1 && spilValg > 4)
-                {
-                    Console.WriteLine("Du skal skrive et tal mellem 1 og 4");
-                    Console.ReadKey();
-                    continue;
-                }
-                break;
-
-
-            }
-
-
-
-            switch (spilValg)
-            {
-                case 1:
-                    Hangman();
-                    break;
-                case 2:
-                    FirePaaStribe();
-                    break;
-                case 3:
-                    Console.Clear();
-                    HovedRegning();
-                    break;
-                case 4:
-                    NumbersInOrder();
-                    break;
-                default:
-                    Console.WriteLine("Fejl");
-                    break;
+                Console.WriteLine("Du skal indtaste et tal mellem 1 og 4\nTryk en tast for at prøve igen");
+                Console.ReadKey();
+                continue;
             }
         }
 
