@@ -6,11 +6,16 @@ namespace Basisprogrammering_Projekt
     {
         static void Main(string[] args)
         {
-            FirePaaStribe(); 
 
-            Console.ReadKey();
         }
 
+        // =====================================
+        //         Sæt tal i rækkefølge
+        //                  
+        //           Author: Oliver
+        // =====================================
+
+        // funktion der starter sæt tal i rækkefølge spillet
         static void NumbersInOrder()
         {
             // globale variabler for spillet
@@ -199,6 +204,13 @@ namespace Basisprogrammering_Projekt
             //}
         }
 
+        // =====================================
+        //            Hovedregning
+        //                  
+        //           Author: Oliver
+        // =====================================
+
+        // funktion der starter hovedregning spillet
         static void HovedRegning()
         {
             // Globale variabler for HovedRegning spillet.
@@ -277,8 +289,13 @@ namespace Basisprogrammering_Projekt
             }
         }
 
-        // FirePaaStribe overodnet funktion som kalder spillet.
+        // =====================================
+        //           Fire på stribe
+        //                  
+        //           Author: Oliver
+        // =====================================
 
+        // FirePaaStribe overodnet funktion som kalder spillet.
         static void FirePaaStribe()
         {
             // Nedenunder findes de globale variabler for spillet, som gør dem tilgængelig i hele spillets scope.
