@@ -1,10 +1,22 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Basisprogrammering_Projekt
 {
     internal class Program
     {
         static void Main(string[] args)
+        {
+            Menu();
+        }
+
+        // =====================================
+        //               Menu
+        //           Author: Nicolas
+        //          Vejledning: Oliver
+        // =====================================
+
+        static void Menu()
         {
             while (true)
             {
@@ -124,11 +136,19 @@ namespace Basisprogrammering_Projekt
             while (playing) // main loop for spillet. Ser om spillet kører, så længde det gør er spillet stadig i gang.
             {
                 Console.Clear();
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("Du kan til en hver tid slutte spillet ved at skrive 000");
+                Console.ResetColor();
                 PrintNumberArray(); // Hvert loop startes der med at printes numbers array.
                 Console.WriteLine();
                 Console.WriteLine("Indtast positionen der skal flyttes"); // spilleren indtaster posOne
                 if (!int.TryParse(Console.ReadLine(), out posOne)) // ser om inputtet er et nummer
                     continue; // hvis ikke starter den loopet forfra. (continue) indtil input indeholder et nummer.
+
+                if(posOne == 000)
+                {
+                    Menu();
+                }
 
                 if(posOne < 0 || posOne > numbers.Length -1) // Tjekker om posOne er mindre end 0, eller større end længden af array -1.
                     // Hvis det er sandt betyder det at posOne er "out of bounds", og har ikke en tilsvarende værdi i array.
@@ -145,6 +165,11 @@ namespace Basisprogrammering_Projekt
                 Console.WriteLine("Indtast positionen der skal erstattes"); // posTwo
                 if (!int.TryParse(Console.ReadLine(), out posTwo))
                     continue;
+
+                if (posTwo == 99)
+                {
+                    Menu();
+                }
 
                 if (posTwo < 0 || posTwo > numbers.Length -1) // Identisk til den ovenover, kun variable er skiftet.
                 {
@@ -179,7 +204,6 @@ namespace Basisprogrammering_Projekt
                     Console.ResetColor();
                     playing = false; // spillet er slut, playing = false.
                 }
-                
             }
            
             // InitNumerArray() funktionen tildeler numbers array 10 random værdier mellem 1-99.
@@ -324,6 +348,8 @@ namespace Basisprogrammering_Projekt
 
                 if (int.TryParse(Console.ReadLine(), out int answer)) // Ser om inputtet kan parses til en int.
                 {
+                    if (answer == 000)
+                        Menu();
                     if(answer == calculationVal[pos]) // Hvis spillerens gæt = den position vi er nået
                         // så må gættet være korrekt. Der sammenlignes derfor værdien i calculationVal[pos] med spillerens gæt.
                     {
@@ -370,6 +396,8 @@ namespace Basisprogrammering_Projekt
                 Console.WriteLine("2. Spillet stiger i sværhedsgrad efter hver opgave.");
                 Console.WriteLine("3. Du skal derfor benytte de såkaldte 'regneregler' igen :)");
                 Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("Du kan til en hver tid slutte spillet ved at skrive 000");
                 Console.ForegroundColor= ConsoleColor.Cyan;
                 Console.WriteLine("Held og lykke!");
                 Console.WriteLine();
@@ -420,6 +448,8 @@ namespace Basisprogrammering_Projekt
                 Console.WriteLine(currentMsg); //Udskriver en variation af en besked afhængig af spillerens tur. 
                 if (int.TryParse(Console.ReadLine(), out int colNum)) // Læseren spillerens input, og ser om det er et valid nummer.
                 {
+                    if (colNum == 000)
+                        Menu();
                     // sikrer at spilleren ikke kan gå uden for boardet
                     if (colNum < 0 || colNum >= board.GetLength(1)) // Kolonne nummeret spilleren indtaster må ikke være
                                                                     // mindre end 0, og må ikke være større end mængden af kolonner i boardet.
@@ -673,9 +703,10 @@ namespace Basisprogrammering_Projekt
                 Console.WriteLine("1. Spillerne, bestående af (2), skiftes til at vælge en kolonne (0-6).");
                 Console.WriteLine("2. Din brik falder ned på den nederste ledige plads.");
                 Console.WriteLine("3. Første spiller med 4 på stribe (vandret, lodret eller diagonalt) vinder!");
-                Console.ResetColor();
-
                 Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("Du kan til en hver tid slutte spillet ved at skrive 000");
+
                 // Cyan farve for begynd spillet besked
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("Tryk på en tast for at begynde spillet...");
