@@ -166,7 +166,7 @@ namespace Basisprogrammering_Projekt
                 if (!int.TryParse(Console.ReadLine(), out posTwo))
                     continue;
 
-                if (posTwo == 99)
+                if (posTwo == 000)
                 {
                     Menu();
                 }
