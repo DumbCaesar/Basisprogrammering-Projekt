@@ -363,8 +363,6 @@ namespace Basisprogrammering_Projekt
 
                 if (int.TryParse(input, out int answer)) // Ser om inputtet kan parses til en int.
                 {
-                    if (answer == 000)
-                        Menu();
                     if(answer == calculationVal[pos]) // Hvis spillerens gæt = den position vi er nået
                         // så må gættet være korrekt. Der sammenlignes derfor værdien i calculationVal[pos] med spillerens gæt.
                     {
