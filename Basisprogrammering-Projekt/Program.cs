@@ -87,6 +87,11 @@ namespace Basisprogrammering_Projekt
                 char guess = Convert.ToChar(input);
                 bool correct = false;
 
+                if(guess == 000)
+                {
+                    Menu();
+                }
+
                 for (int i = 0; i < randomWordLength; i++)
                 {
                     if (randomWord[i] == guess)
@@ -109,6 +114,17 @@ namespace Basisprogrammering_Projekt
             {
                 Console.Clear();
                 Console.WriteLine("You Win! The word was: " + randomWord);
+            }
+            Console.WriteLine("To play again, type r");
+            Console.WriteLine("To return to menu, type anything else");
+            string endInput = Console.ReadLine();
+            if(endInput == "r")
+            {
+                Hangman();
+            }
+            else
+            {
+                Menu();
             }
         }
 
