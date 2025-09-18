@@ -18,19 +18,20 @@ namespace Basisprogrammering_Projekt
 
         static void Menu()
         {
-            while (true)
+            while (true) // hele menuen foregår i et while loop
             {
                 Console.Clear();
-                int spilValg = 0;
+                int spilValg = 0; 
                 Console.WriteLine("Indtast tallet på det spil du vil spille \n");
                 Console.WriteLine("1. Hangman");
                 Console.WriteLine("2. Fire på stribe");
                 Console.WriteLine("3. Hovedregning");
                 Console.WriteLine("4. Sæt tal i rækkefølge");
-                if (int.TryParse(Console.ReadLine(), out spilValg))
+                if (int.TryParse(Console.ReadLine(), out spilValg)) // læser spillerens input
                 {
                     if (spilValg > 0 && spilValg < 5)
                     {
+                        // hvis spillerens input er et tal fra 1 til 4 starter spillet med det nummer i switchen
                         switch (spilValg)
                         {
                             case 1:
@@ -49,6 +50,7 @@ namespace Basisprogrammering_Projekt
                         }
                     }
                 }
+                // loopet starter forfra hvis spilleren skriver et tal, som ikke er mellem 1 og 4, eller hvis de skriver et bogstav
                 Console.WriteLine("Du skal indtaste et tal mellem 1 og 4\nTryk en tast for at prøve igen");
                 Console.ReadKey();
                 continue;
@@ -84,46 +86,51 @@ namespace Basisprogrammering_Projekt
             while (lives > 0 && word.Contains("-")) // while loop, der kører så længe spilleren har mere end 0 liv og ordet ikke er gættet
             {
                 Console.Clear(); // clearer så spillet ikke ser rodet ud efter man har gættet
-                Console.WriteLine(word); // 
-                Console.WriteLine("Lives left: " + lives);
+                Console.WriteLine(word); // Skriver ordet som spilleren skal gætte
+                Console.WriteLine("Lives left: " + lives); // viser antal liv
                 Console.WriteLine("Guess a letter");
-                string input = Console.ReadLine().ToUpper();
+                string input = Console.ReadLine().ToUpper(); // læser spillerens input og laver det til stort bogstav
 
-                char guess = Convert.ToChar(input);
-                bool correct = false;
+                char guess = Convert.ToChar(input); // converter spillerens input til char
+                bool correct = false; // laver en bool sat til false
 
-                for (int i = 0; i < randomWordLength; i++)
+                for (int i = 0; i < randomWordLength; i++) 
                 {
-                    if (randomWord[i] == guess)
+                    if (randomWord[i] == guess) // tjekker spillerens gæt passer men et bogstav i ordet
                     {
-                        word = word.Remove(i, 1).Insert(i, guess.ToString());
-                        correct = true;
+                        word = word.Remove(i, 1).Insert(i, guess.ToString()); // fjerner et en bindestreg og indsætter et bogstav
+                        correct = true; // sætter boolen til true, så spilleren ikke mister liv
                     }
                 }
                 if (!correct)
                 {
-                    lives--;
+                    lives--; // spilleren mister liv hvis de gætter forkert
                 }
             }
             if (word.Contains("-"))
             {
+                // hvis ordet stadig indeholder bindestreger er spillet tabt, og ordet vises på skærmen
                 Console.Clear();
                 Console.WriteLine("You Lose! The word was: " + randomWord);
             }
             else
             {
+                // spillet er vundet
                 Console.Clear();
                 Console.WriteLine("You Win! The word was: " + randomWord);
             }
+            // til sidst får spilleren mulighed for at spille igen eller vende tilbage til menuen
             Console.WriteLine("To play again, type r");
             Console.WriteLine("To return to menu, type anything else");
-            string endInput = Console.ReadLine();
+            string endInput = Console.ReadLine(); // læser spillerens input
             if(endInput == "r")
             {
+                // hvis spilleren skriver r, starter funktionen Hangman igen
                 Hangman();
             }
             else
             {
+                // hvis spilleren skriver andet end r, vender de tilbage til menuen
                 Menu();
             }
         }
