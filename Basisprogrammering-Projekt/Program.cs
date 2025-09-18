@@ -6,6 +6,11 @@ namespace Basisprogrammering_Projekt
     {
         static void Main(string[] args)
         {
+            Menu();
+        }
+
+        static void Menu()
+        {
             while (true)
             {
                 Console.Clear();
