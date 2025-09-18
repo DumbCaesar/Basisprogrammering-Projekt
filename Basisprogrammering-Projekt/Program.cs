@@ -346,7 +346,14 @@ namespace Basisprogrammering_Projekt
             {
                 Console.WriteLine(calculationExa[pos]); // Udskriver regneeksemplet vi er nået til.
 
-                if (int.TryParse(Console.ReadLine(), out int answer)) // Ser om inputtet kan parses til en int.
+                string input = Console.ReadLine(); // 
+                if (input == "000") // Vi tjekker om spilleren vil ud af spillet
+                {
+                    Menu(); // Kalder menuen
+                    return; // og stoppper spilfunktionen
+                }
+
+                if (int.TryParse(input, out int answer)) // Ser om inputtet kan parses til en int.
                 {
                     if (answer == 000)
                         Menu();
