@@ -490,6 +490,7 @@ namespace Basisprogrammering_Projekt
                         Console.WriteLine($"Spilleren med '{currentPiece}' har vundet!"); // Udskriver en besked
                         // Der oplyser at spilleren med ("O"/"X") har vundet.
                         Console.ResetColor(); // reset konsol tekstfarve/farver
+                        Console.ReadKey();
                         break; // gameNotWon = false (vinder fundet)
                     }
 
@@ -499,6 +500,7 @@ namespace Basisprogrammering_Projekt
                         Console.ForegroundColor = ConsoleColor.Yellow; // Sætter konsol tekstfarven til gul.
                         Console.WriteLine("Spillet er uafgjort!"); // samme som ovenover. Ingen vundet fundet, printer til konsol.
                         Console.ResetColor();
+                        Console.ReadKey();  
                         break; // gameNotWon = false (ingen vinder fundet)
                     }
 
@@ -517,6 +519,8 @@ namespace Basisprogrammering_Projekt
                     Console.ResetColor();
                 }
             }
+            Console.Clear();
+            FirePaaStribe();
 
             bool CheckDraw() // Boolean funktion. Tjekker om spillet er et draw.
             {
