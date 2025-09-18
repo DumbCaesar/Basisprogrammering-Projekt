@@ -136,12 +136,19 @@ namespace Basisprogrammering_Projekt
             while (playing) // main loop for spillet. Ser om spillet kører, så længde det gør er spillet stadig i gang.
             {
                 Console.Clear();
-                Console.WriteLine("Skriv QUIT for at tilbage til menuen.");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("Du kan til en hver tid slutte spillet ved at skrive 99");
+                Console.ResetColor();
                 PrintNumberArray(); // Hvert loop startes der med at printes numbers array.
                 Console.WriteLine();
                 Console.WriteLine("Indtast positionen der skal flyttes"); // spilleren indtaster posOne
                 if (!int.TryParse(Console.ReadLine(), out posOne)) // ser om inputtet er et nummer
                     continue; // hvis ikke starter den loopet forfra. (continue) indtil input indeholder et nummer.
+
+                if( posOne == 99)
+                {
+                    Menu();
+                }
 
                 if(posOne < 0 || posOne > numbers.Length -1) // Tjekker om posOne er mindre end 0, eller større end længden af array -1.
                     // Hvis det er sandt betyder det at posOne er "out of bounds", og har ikke en tilsvarende værdi i array.
@@ -158,6 +165,11 @@ namespace Basisprogrammering_Projekt
                 Console.WriteLine("Indtast positionen der skal erstattes"); // posTwo
                 if (!int.TryParse(Console.ReadLine(), out posTwo))
                     continue;
+
+                if (posTwo == 99)
+                {
+                    Menu();
+                }
 
                 if (posTwo < 0 || posTwo > numbers.Length -1) // Identisk til den ovenover, kun variable er skiftet.
                 {
@@ -192,7 +204,6 @@ namespace Basisprogrammering_Projekt
                     Console.ResetColor();
                     playing = false; // spillet er slut, playing = false.
                 }
-                
             }
            
             // InitNumerArray() funktionen tildeler numbers array 10 random værdier mellem 1-99.
