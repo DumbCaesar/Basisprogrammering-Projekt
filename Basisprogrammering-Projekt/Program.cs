@@ -142,13 +142,16 @@ namespace Basisprogrammering_Projekt
                 PrintNumberArray(); // Hvert loop startes der med at printes numbers array.
                 Console.WriteLine();
                 Console.WriteLine("Indtast positionen der skal flyttes"); // spilleren indtaster posOne
-                if (!int.TryParse(Console.ReadLine(), out posOne)) // ser om inputtet er et nummer
-                    continue; // hvis ikke starter den loopet forfra. (continue) indtil input indeholder et nummer.
 
-                if(posOne == 000)
+                string input = Console.ReadLine();
+                if (input == "000") // Vi tjekker om spilleren vil ud af spillet
                 {
-                    Menu();
+                    Menu(); // Kalder menuen
+                    return; // og stoppper spilfunktionen
                 }
+
+                if (!int.TryParse(input, out posOne)) // ser om inputtet er et nummer
+                    continue; // hvis ikke starter den loopet forfra. (continue) indtil input indeholder et nummer.
 
                 if(posOne < 0 || posOne > numbers.Length -1) // Tjekker om posOne er mindre end 0, eller større end længden af array -1.
                     // Hvis det er sandt betyder det at posOne er "out of bounds", og har ikke en tilsvarende værdi i array.
@@ -163,13 +166,16 @@ namespace Basisprogrammering_Projekt
                 }
 
                 Console.WriteLine("Indtast positionen der skal erstattes"); // posTwo
-                if (!int.TryParse(Console.ReadLine(), out posTwo))
-                    continue;
 
-                if (posTwo == 000)
+                string inputTwo = Console.ReadLine();
+                if (inputTwo == "000") // Vi tjekker om spilleren vil ud af spillet
                 {
-                    Menu();
+                    Menu(); // Kalder menuen
+                    return; // og stoppper spilfunktionen
                 }
+
+                if (!int.TryParse(inputTwo, out posTwo))
+                    continue;
 
                 if (posTwo < 0 || posTwo > numbers.Length -1) // Identisk til den ovenover, kun variable er skiftet.
                 {
