@@ -145,7 +145,7 @@ namespace Basisprogrammering_Projekt
                 if (!int.TryParse(Console.ReadLine(), out posOne)) // ser om inputtet er et nummer
                     continue; // hvis ikke starter den loopet forfra. (continue) indtil input indeholder et nummer.
 
-                if( posOne == 99)
+                if(posOne == 00)
                 {
                     Menu();
                 }
