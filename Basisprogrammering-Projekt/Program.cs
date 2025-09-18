@@ -384,6 +384,8 @@ namespace Basisprogrammering_Projekt
             // som spilleren fik ud af den totale mængde af mulige points
             Console.ResetColor();
             Console.ReadKey();
+            Console.Clear();
+            HovedRegning(); // Kalder spillet igen, så det looper.
 
             // GreetMessage() funktionen forklarer hvordan spillet virker, og giver en kort og kvik introduktion.
             void GreetMessage()
