@@ -61,25 +61,30 @@ namespace Basisprogrammering_Projekt
         //           Author: Nicolas
         // =====================================
 
-        static void Hangman()
+        static void Hangman() // funktionen, som starter hangman
         {
-            string[] wordList = { "TIGER", "CRANES", "GLUE", "BICYCLE", "ELEPHANT", "CRASH", "FLUSH", "READING", "CONSTRUCTION" };
+            // et array, som indeholder alle de mulige ord
+            string[] wordList = { "TIGER", "CRANES", "GLUE", "BICYCLE", "ELEPHANT", "CRASH", "FLUSH", "READING", "CONSTRUCTION", "COMPUTER", "WATCH", "SHOWER", "COLLECT", "GROUND", "FURNITURE", "HUNDRED", "KITCHEN", "MAGNET", "THROUGH", "DROUGHT"};
+            
+            // genererer et random nummer, som er mellem 0 og det antal ord der er i wordList arrayet
             Random random = new Random();
             int randomNumber = random.Next(wordList.Length);
-            string randomWord = wordList[randomNumber];
-            int randomWordLength = randomWord.Length;
-            int lives = 5;
+            
+            string randomWord = wordList[randomNumber]; // bruger det tilfældige tal til at vælge et ord fra wordList arrayet
+            int randomWordLength = randomWord.Length; // laver en integer variabel, som er længden på det valgte ord
+            
+            int lives = 5; // lives variabel med værdi på 5
 
-            string word = "";
-            for (int i = 0; i < randomWordLength; i++)
+            string word = ""; // laver en string som er blank
+            for (int i = 0; i < randomWordLength; i++) // et loop, der sætter en bindestreg for hvert bogstag i det valgte ord
             {
                 word += "-";
             }
 
-            while (lives > 0 && word.Contains("-"))
+            while (lives > 0 && word.Contains("-")) // while loop, der kører så længe spilleren har mere end 0 liv og ordet ikke er gættet
             {
-                Console.Clear();
-                Console.WriteLine(word);
+                Console.Clear(); // clearer så spillet ikke ser rodet ud efter man har gættet
+                Console.WriteLine(word); // 
                 Console.WriteLine("Lives left: " + lives);
                 Console.WriteLine("Guess a letter");
                 string input = Console.ReadLine().ToUpper();
@@ -109,6 +114,17 @@ namespace Basisprogrammering_Projekt
             {
                 Console.Clear();
                 Console.WriteLine("You Win! The word was: " + randomWord);
+            }
+            Console.WriteLine("To play again, type r");
+            Console.WriteLine("To return to menu, type anything else");
+            string endInput = Console.ReadLine();
+            if(endInput == "r")
+            {
+                Hangman();
+            }
+            else
+            {
+                Menu();
             }
         }
 
