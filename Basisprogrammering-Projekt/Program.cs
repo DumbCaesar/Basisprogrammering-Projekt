@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Basisprogrammering_Projekt
 {
@@ -8,6 +9,12 @@ namespace Basisprogrammering_Projekt
         {
             Menu();
         }
+
+        // =====================================
+        //               Menu
+        //           Author: Nicolas
+        //          Vejledning: Oliver
+        // =====================================
 
         static void Menu()
         {
@@ -129,6 +136,7 @@ namespace Basisprogrammering_Projekt
             while (playing) // main loop for spillet. Ser om spillet kører, så længde det gør er spillet stadig i gang.
             {
                 Console.Clear();
+                Console.WriteLine("Skriv QUIT for at tilbage til menuen.");
                 PrintNumberArray(); // Hvert loop startes der med at printes numbers array.
                 Console.WriteLine();
                 Console.WriteLine("Indtast positionen der skal flyttes"); // spilleren indtaster posOne
