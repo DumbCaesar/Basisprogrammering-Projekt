@@ -446,10 +446,16 @@ namespace Basisprogrammering_Projekt
                 // som currentPiece, der tjekkes hvilken spillers tur det er, og den korrete besked vises.
 
                 Console.WriteLine(currentMsg); //Udskriver en variation af en besked afhængig af spillerens tur. 
-                if (int.TryParse(Console.ReadLine(), out int colNum)) // Læseren spillerens input, og ser om det er et valid nummer.
+
+                string input = Console.ReadLine(); // 
+                if(input == "000") // Vi tjekker om spilleren vil ud af spillet
                 {
-                    if (colNum == 000)
-                        Menu();
+                    Menu(); // Kalder menuen
+                    return; // og stoppper spilfunktionen
+                }
+
+                if (int.TryParse(input, out int colNum)) // Læseren spillerens input, og ser om det er et valid nummer.
+                {
                     // sikrer at spilleren ikke kan gå uden for boardet
                     if (colNum < 0 || colNum >= board.GetLength(1)) // Kolonne nummeret spilleren indtaster må ikke være
                                                                     // mindre end 0, og må ikke være større end mængden af kolonner i boardet.
