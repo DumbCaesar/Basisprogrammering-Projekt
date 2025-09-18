@@ -348,6 +348,8 @@ namespace Basisprogrammering_Projekt
 
                 if (int.TryParse(Console.ReadLine(), out int answer)) // Ser om inputtet kan parses til en int.
                 {
+                    if (answer == 00)
+                        Menu();
                     if(answer == calculationVal[pos]) // Hvis spillerens gæt = den position vi er nået
                         // så må gættet være korrekt. Der sammenlignes derfor værdien i calculationVal[pos] med spillerens gæt.
                     {
@@ -394,6 +396,8 @@ namespace Basisprogrammering_Projekt
                 Console.WriteLine("2. Spillet stiger i sværhedsgrad efter hver opgave.");
                 Console.WriteLine("3. Du skal derfor benytte de såkaldte 'regneregler' igen :)");
                 Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("Du kan til en hver tid slutte spillet ved at skrive 00");
                 Console.ForegroundColor= ConsoleColor.Cyan;
                 Console.WriteLine("Held og lykke!");
                 Console.WriteLine();
