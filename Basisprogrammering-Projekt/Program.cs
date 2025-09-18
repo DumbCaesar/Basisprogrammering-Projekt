@@ -137,7 +137,7 @@ namespace Basisprogrammering_Projekt
             {
                 Console.Clear();
                 Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.WriteLine("Du kan til en hver tid slutte spillet ved at skrive 99");
+                Console.WriteLine("Du kan til en hver tid slutte spillet ved at skrive 000");
                 Console.ResetColor();
                 PrintNumberArray(); // Hvert loop startes der med at printes numbers array.
                 Console.WriteLine();
@@ -145,7 +145,7 @@ namespace Basisprogrammering_Projekt
                 if (!int.TryParse(Console.ReadLine(), out posOne)) // ser om inputtet er et nummer
                     continue; // hvis ikke starter den loopet forfra. (continue) indtil input indeholder et nummer.
 
-                if(posOne == 00)
+                if(posOne == 000)
                 {
                     Menu();
                 }
@@ -348,7 +348,7 @@ namespace Basisprogrammering_Projekt
 
                 if (int.TryParse(Console.ReadLine(), out int answer)) // Ser om inputtet kan parses til en int.
                 {
-                    if (answer == 00)
+                    if (answer == 000)
                         Menu();
                     if(answer == calculationVal[pos]) // Hvis spillerens gæt = den position vi er nået
                         // så må gættet være korrekt. Der sammenlignes derfor værdien i calculationVal[pos] med spillerens gæt.
@@ -397,7 +397,7 @@ namespace Basisprogrammering_Projekt
                 Console.WriteLine("3. Du skal derfor benytte de såkaldte 'regneregler' igen :)");
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.WriteLine("Du kan til en hver tid slutte spillet ved at skrive 00");
+                Console.WriteLine("Du kan til en hver tid slutte spillet ved at skrive 000");
                 Console.ForegroundColor= ConsoleColor.Cyan;
                 Console.WriteLine("Held og lykke!");
                 Console.WriteLine();
@@ -448,7 +448,7 @@ namespace Basisprogrammering_Projekt
                 Console.WriteLine(currentMsg); //Udskriver en variation af en besked afhængig af spillerens tur. 
                 if (int.TryParse(Console.ReadLine(), out int colNum)) // Læseren spillerens input, og ser om det er et valid nummer.
                 {
-                    if (colNum == 00)
+                    if (colNum == 000)
                         Menu();
                     // sikrer at spilleren ikke kan gå uden for boardet
                     if (colNum < 0 || colNum >= board.GetLength(1)) // Kolonne nummeret spilleren indtaster må ikke være
@@ -705,7 +705,7 @@ namespace Basisprogrammering_Projekt
                 Console.WriteLine("3. Første spiller med 4 på stribe (vandret, lodret eller diagonalt) vinder!");
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.WriteLine("Du kan til en hver tid slutte spillet ved at skrive 00");
+                Console.WriteLine("Du kan til en hver tid slutte spillet ved at skrive 000");
 
                 // Cyan farve for begynd spillet besked
                 Console.ForegroundColor = ConsoleColor.Cyan;
