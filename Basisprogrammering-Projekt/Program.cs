@@ -208,7 +208,9 @@ namespace Basisprogrammering_Projekt
                     Console.ForegroundColor = ConsoleColor.Gray;
                     Console.WriteLine($"Du brugte {numberOfTry} forsøg."); // udskriver mængden af forsøg brugt.
                     Console.ResetColor();
+                    Console.ReadKey();
                     playing = false; // spillet er slut, playing = false.
+                    NumbersInOrder();
                 }
             }
            
