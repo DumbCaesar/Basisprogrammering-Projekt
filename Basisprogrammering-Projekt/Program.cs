@@ -448,6 +448,8 @@ namespace Basisprogrammering_Projekt
                 Console.WriteLine(currentMsg); //Udskriver en variation af en besked afhængig af spillerens tur. 
                 if (int.TryParse(Console.ReadLine(), out int colNum)) // Læseren spillerens input, og ser om det er et valid nummer.
                 {
+                    if (colNum == 00)
+                        Menu();
                     // sikrer at spilleren ikke kan gå uden for boardet
                     if (colNum < 0 || colNum >= board.GetLength(1)) // Kolonne nummeret spilleren indtaster må ikke være
                                                                     // mindre end 0, og må ikke være større end mængden af kolonner i boardet.
@@ -701,9 +703,10 @@ namespace Basisprogrammering_Projekt
                 Console.WriteLine("1. Spillerne, bestående af (2), skiftes til at vælge en kolonne (0-6).");
                 Console.WriteLine("2. Din brik falder ned på den nederste ledige plads.");
                 Console.WriteLine("3. Første spiller med 4 på stribe (vandret, lodret eller diagonalt) vinder!");
-                Console.ResetColor();
-
                 Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("Du kan til en hver tid slutte spillet ved at skrive 00");
+
                 // Cyan farve for begynd spillet besked
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("Tryk på en tast for at begynde spillet...");
