@@ -304,7 +304,7 @@ namespace Basisprogrammering_Projekt
             int[] SortArray(int[] array)
             {
                 int[] copy = (int[])array.Clone(); // Laver en kopi, ellers bliver det sortered array
-                                                   // skrevet ud i stedet for det usorterede, somehow.
+                                                   // skrevet ud i stedet for det usorterede.
                 Array.Sort(copy); // sorterer kopien i stigende rækkefølge.
                 return copy; // og returnerer den, som er et krav, da funktionen skal retunere et int[].
             }
